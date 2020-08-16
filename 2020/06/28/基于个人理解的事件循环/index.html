@@ -15,7 +15,7 @@
 <meta property="og:description" content="1.1 什么是事件循环客户端Web应用的生命周期主要包括:页面构建,事件处理.其中事件处理主要通过事件循环(Event Loop)这种机制进行处理. 1.2 深入事件循环1.2.1 事件队列和任务事件循环中包含了两个事件队列用于分别存放不同类别的任务 任务则可以分为两类:   宏任务 微任务  宏任务主要包括:   创建文档对象 解析HTML 执行主线(或全局)JS 更改当前URL 各种其他事件(">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-28T14:10:43.000Z">
-<meta property="article:modified_time" content="2020-08-16T15:41:52.433Z">
+<meta property="article:modified_time" content="2020-08-16T15:59:36.413Z">
 <meta property="article:author" content="URAIDIOT">
 <meta name="twitter:card" content="summary">
   
@@ -117,7 +117,7 @@
 </li>
 </ul>
 <p>单次循环基本流程如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: Start</span><br><span class="line">cond1&#x3D;&gt;condition: 宏队列是否为空?</span><br><span class="line">o1&#x3D;&gt;operation: 执行一项宏任务</span><br><span class="line">cond2&#x3D;&gt;condition: 微任务队列是否为空?</span><br><span class="line">o2&#x3D;&gt;operation: 执行一项微任务</span><br><span class="line">cond3&#x3D;&gt;condition: 是否需要重新渲染?</span><br><span class="line">o3&#x3D;&gt;operation: 重新渲染</span><br><span class="line">e&#x3D;&gt;end: End</span><br><span class="line"></span><br><span class="line">st-&gt;cond1</span><br><span class="line">cond1(no)-&gt;o1-&gt;cond2</span><br><span class="line">cond1(yes)-&gt;cond2</span><br><span class="line">cond2(no)-&gt;o2-&gt;cond2</span><br><span class="line">cond2(yes)-&gt;cond3</span><br><span class="line">cond3(no)-&gt;e</span><br><span class="line">cond3(yes)-&gt;o3-&gt;e</span><br></pre></td></tr></table></figure>
+<div id="flowchart-0" class="flow-chart"></div>
 
 <p>在一次迭代中,事件循环首先检查宏任务队列,如果宏任务等待,则立即开始执行宏任务.直到该任务运行完成,事件循环将移动到微任务队列,并将微任务队列中所有任务执行完毕.完成之后,检查UI视图是否更新.之后再重新进入下一次迭代.</p>
 <p>单次事件循环中,最多处理一个宏任务(其余在队列中等待),而所有微任务都将被处理.</p>
@@ -130,11 +130,26 @@
 <p>第五步执行<code>doSomething</code>函数,输出2</p>
 <p>第六步完成执行全局<code>js</code>这个宏任务,开始检查微任务队列,并全部执行,输出4</p>
 <p>第七步进行下一次事件循环迭代.执行<code>setTimeout</code>回调,输出3</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
+cond1=>condition: 宏队列是否为空?
+o1=>operation: 执行一项宏任务
+cond2=>condition: 微任务队列是否为空?
+o2=>operation: 执行一项微任务
+cond3=>condition: 是否需要重新渲染?
+o3=>operation: 重新渲染
+e=>end: End
 
+st->cond1
+cond1(no)->o1->cond2
+cond1(yes)->cond2
+cond2(no)->o2->cond2
+cond2(yes)->cond3
+cond3(no)->e
+cond3(yes)->o3->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://uraidiot.github.io/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" data-id="ckdx9c926000125qkfppc0ln4" class="article-share-link">Share</a>
+      <a data-url="https://uraidiot.github.io/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" data-id="ckdx9z2eq0001zmr01cp3457f" class="article-share-link">Share</a>
       
       
     </footer>
