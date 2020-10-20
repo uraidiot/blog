@@ -221,21 +221,21 @@ Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
 }
 ```
 
-### 自定义指令
+#### 自定义指令
 
 [参考地址](https://cn.vuejs.org/v2/guide/custom-directive.html)
 
-### 渲染函数 & JSX
+#### 渲染函数 & JSX
 
 [参考地址](https://cn.vuejs.org/v2/guide/render-function.html)
 
-### 插件
+#### 插件
 
 > 插件通常用来为 Vue 添加全局功能。
 
 [参考地址](https://cn.vuejs.org/v2/guide/plugins.html)
 
-### 过滤器
+#### 过滤器
 
 > Vue.js 允许你自定义过滤器，可被用于一些常见的文本格式化。
 
