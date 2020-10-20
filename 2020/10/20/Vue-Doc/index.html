@@ -5,15 +5,17 @@
   
 
   
-  <title>有点乱的blog</title>
+  <title>Vue-Doc | 有点乱的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哦豁~乱">
-<meta property="og:type" content="website">
-<meta property="og:title" content="有点乱的blog">
-<meta property="og:url" content="https://uraidiot.github.io/blog/index.html">
+  <meta name="description" content="计算属性computed 与 methods 比较,  computed 具有缓存, 在 data 未发生改变时, 多次执行 computed 不执行函数, 直接返回结果  computed 同样具有 setter 12345678910111213eg.computed: &amp;#123;    fullName: &amp;#123;        get: function () &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Doc">
+<meta property="og:url" content="https://uraidiot.github.io/blog/2020/10/20/Vue-Doc/index.html">
 <meta property="og:site_name" content="有点乱的blog">
-<meta property="og:description" content="哦豁~乱">
+<meta property="og:description" content="计算属性computed 与 methods 比较,  computed 具有缓存, 在 data 未发生改变时, 多次执行 computed 不执行函数, 直接返回结果  computed 同样具有 setter 12345678910111213eg.computed: &amp;#123;    fullName: &amp;#123;        get: function () &amp;#123;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-20T21:49:00.000Z">
+<meta property="article:modified_time" content="2020-10-20T13:51:27.269Z">
 <meta property="article:author" content="URAIDIOT">
 <meta name="twitter:card" content="summary">
   
@@ -64,9 +66,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Vue-Doc" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Vue-Doc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/10/20/Vue-Doc/" class="article-date">
   <time datetime="2020-10-20T21:49:00.000Z" itemprop="datePublished">2020-10-20</time>
@@ -79,8 +79,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/20/Vue-Doc/">Vue-Doc</a>
+    <h1 class="article-title" itemprop="name">
+      Vue-Doc
     </h1>
   
 
@@ -225,169 +225,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-基于个人理解的curry化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/" class="article-date">
-  <time datetime="2020-08-16T15:48:31.000Z" itemprop="datePublished">2020-08-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/">基于个人理解的curry化</a>
-    </h1>
+    <a href="/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于个人理解的curry化</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="函数curry化"><a href="#函数curry化" class="headerlink" title="函数curry化"></a>函数curry化</h3><ul>
-<li>定义</li>
-</ul>
-<blockquote>
-<p>柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。</p>
-</blockquote>
-<blockquote>
-<p>大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数</p>
-</blockquote>
-<ul>
-<li><p>涉及知识</p>
-<ol>
-<li>闭包</li>
-<li>递归</li>
-</ol>
-</li>
-<li><p>代码</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let judge;</span><br><span class="line"></span><br><span class="line">let curry &#x3D; (fn) &#x3D;&gt; </span><br><span class="line">    judge &#x3D; (...args) &#x3D;&gt;</span><br><span class="line">         args.length &#x3D;&#x3D;&#x3D; fn.length ? &#x2F;&#x2F; 判断传入参数个数与原函数形参个数是否相同</span><br><span class="line">             fn.apply(null, args) :  &#x2F;&#x2F; 相同则执行原函数</span><br><span class="line">             (...arg) &#x3D;&gt; judge(...args, ...arg) &#x2F;&#x2F; 不相同则再次传入judge函数</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所有的 args 都通过闭包得到了保存</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let add &#x3D; (a, b) &#x3D;&gt; a+b</span><br><span class="line"></span><br><span class="line">let curriedAdd &#x3D; curry(add);</span><br><span class="line"></span><br><span class="line">console.log(curriedAdd(1, 2)); &#x2F;&#x2F; 3</span><br><span class="line">console.log(curriedAdd(4)(5)); &#x2F;&#x2F; 9</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>执行过程</li>
-</ul>
-<p>声明<code>curry</code>函数,接受一个原函数<code>function</code>作为参数,返回一个<code>judge</code>判断函数,判断传入<code>judge</code>函数的参数个数与原函数的形参个数是否相同,如果相同则将所有参数传入原函数并执行,如果不同,则将之前的参数与后面的参数再次传入<code>judge</code>函数进行判读</p>
-<ul>
-<li>参考资料</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/42">JavaScript专题之函数柯里化</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/" data-id="ckgi10ncp0001z8s8gfixd03m" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-基于个人理解的事件循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2020-06-28T14:10:43.000Z" itemprop="datePublished">2020-06-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">基于个人理解的事件循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-1-什么是事件循环"><a href="#1-1-什么是事件循环" class="headerlink" title="1.1 什么是事件循环"></a>1.1 什么是事件循环</h3><p>客户端<code>Web</code>应用的生命周期主要包括:页面构建,事件处理.其中事件处理主要通过事件循环(<code>Event Loop</code>)这种机制进行处理.</p>
-<h3 id="1-2-深入事件循环"><a href="#1-2-深入事件循环" class="headerlink" title="1.2 深入事件循环"></a>1.2 深入事件循环</h3><h4 id="1-2-1-事件队列和任务"><a href="#1-2-1-事件队列和任务" class="headerlink" title="1.2.1 事件队列和任务"></a>1.2.1 事件队列和任务</h4><p>事件循环中包含了两个事件队列用于分别存放不同类别的任务</p>
-<p>任务则可以分为两类: </p>
-<ul>
-<li>宏任务</li>
-<li>微任务</li>
-</ul>
-<p>宏任务主要包括: </p>
-<ul>
-<li>创建文档对象</li>
-<li>解析HTML</li>
-<li>执行主线(或全局)JS</li>
-<li>更改当前URL</li>
-<li>各种其他事件(页面加载/输入/网络事件和定时器事件等)</li>
-</ul>
-<p><em>注: 执行主线JS是一个任务</em></p>
-<p>微任务主要包括:</p>
-<ul>
-<li>Promise回调函数</li>
-<li>DOM发生变化等</li>
-</ul>
-<h4 id="1-2-2-事件循环的基本原则"><a href="#1-2-2-事件循环的基本原则" class="headerlink" title="1.2.2 事件循环的基本原则"></a>1.2.2 事件循环的基本原则</h4><p>事件循环基于两个基本原则: </p>
-<ul>
-<li><p>一次处理一个任务</p>
-</li>
-<li><p>一个任务开始后直到运行完成,不会被其他任务中断</p>
-</li>
-</ul>
-<p>单次循环基本流程如下:</p>
-<div id="flowchart-0" class="flow-chart"></div>
-
-<p>在一次迭代中,事件循环首先检查宏任务队列,如果宏任务等待,则立即开始执行宏任务.直到该任务运行完成,事件循环将移动到微任务队列,并将微任务队列中所有任务执行完毕.完成之后,检查UI视图是否更新.之后再重新进入下一次迭代.</p>
-<p>单次事件循环中,最多处理一个宏任务(其余在队列中等待),而所有微任务都将被处理.</p>
-<h3 id="2-1-具体示例"><a href="#2-1-具体示例" class="headerlink" title="2.1 具体示例"></a>2.1 具体示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.log(1);</span><br><span class="line"></span><br><span class="line">function doSomething() &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">Promise.resolve().then(() &#x3D;&gt; &#123; console.log(4) &#125;);</span><br><span class="line"></span><br><span class="line">doSomething();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 1, 2, 4, 3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>第一步全局<code>js</code>是一个宏任务,开始执行.首先输出1,</p>
-<p>第二步定义一个<code>doSomething</code>函数,</p>
-<p>第三步执行<code>setTimeout</code>,它的回调属于一个新的宏任务,并放入宏任务队列中.</p>
-<p>第四步执行<code>Promise</code>在<code>then</code>函数中注册了一个回调,属于微任务,放入微任务队列中</p>
-<p>第五步执行<code>doSomething</code>函数,输出2</p>
-<p>第六步完成执行全局<code>js</code>这个宏任务,开始检查微任务队列,并全部执行,输出4</p>
-<p>第七步进行下一次事件循环迭代.执行<code>setTimeout</code>回调,输出3</p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
-cond1=>condition: 宏队列是否为空?
-o1=>operation: 执行一项宏任务
-cond2=>condition: 微任务队列是否为空?
-o2=>operation: 执行一项微任务
-cond3=>condition: 是否需要重新渲染?
-o3=>operation: 重新渲染
-e=>end: End
-
-st->cond1
-cond1(no)->o1->cond2
-cond1(yes)->cond2
-cond2(no)->o2->cond2
-cond2(yes)->cond3
-cond3(no)->e
-cond3(yes)->o3->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://uraidiot.github.io/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" data-id="ckgi10ncr0002z8s8gnu04ogg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
