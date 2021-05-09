@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
@@ -198,6 +198,101 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_cn">
+    <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="URAIDIOT">
+      <meta itemprop="description" content="哦豁~乱">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="有点乱的blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/" class="post-title-link" itemprop="url">JavaScript原型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2021-05-07 16:57:14" itemprop="dateCreated datePublished" datetime="2021-05-07T16:57:14+00:00">2021-05-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2021-05-09 09:07:28" itemprop="dateModified" datetime="2021-05-09T09:07:28+00:00">2021-05-09</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>JavaScript 常被描述为一种基于原型的语言 (prototype-based language)——每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推</p>
+</blockquote>
+<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p><em>重要</em> : 区别对象原型和<code>prototype</code>属性</p>
+<ol>
+<li><p>对象原型</p>
+<p>可以通过<code>Object.getPrototypeof</code>方法或者<code>__proto__</code>(已弃用), 获得对象的原型</p>
+</li>
+<li><p><code>prototype</code>属性</p>
+<p>该属性是在<code>constructor</code>构造函数上的一个<strong>属性</strong> , 在具体的<code>instance</code>实例上, <code>prototype</code>为<code>undefined</code></p>
+<p><em>注:</em> <code>&#123;&#125;</code>对象字面量是没有构造函数的. 定义的函数<code>function</code>是有构造函数的</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let Fn &#x3D; function () &#123;&#125;</span><br><span class="line"></span><br><span class="line">let fnInstance &#x3D; new Fn()</span><br><span class="line"></span><br><span class="line">fnInstance.prototype &#x2F;&#x2F; undefined</span><br><span class="line"></span><br><span class="line">Object.getPrototypeOf(fnInstance) &#x3D;&#x3D; Fn.prototype &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<p><em>注:</em> <strong>没有官方的方法直接访问对象的原型</strong> </p>
+<p><strong>对象定义模式中的编程技巧:</strong>  在<code>constructor</code>构造函数中定义属性, 在<code>prototype</code>中定义方法,可以让代码更具有可读性.(同时也可以提高部分性能?待考证, 在&lt;&lt;JavaScript编程模式&gt;&gt;中有提到过)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let Fn &#x3D; function (name, age) &#123;</span><br><span class="line">&#x2F;**</span><br><span class="line">* 定义属性</span><br><span class="line">*&#x2F;</span><br><span class="line">this.name &#x3D; name</span><br><span class="line">this.age &#x3D; age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line">* 在prototype中定义方法</span><br><span class="line">*&#x2F;</span><br><span class="line">Fn.prototype.hello &#x3D; function () &#123; console.log(&#39;hello, my name is &#39;+this.name)&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes">对象原型-MDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Inheritance">JavaScript中的继承-MDN</a></p>
+<p><em>注:</em> 着重查阅文档中的注意事项</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_cn">
     <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2020/10/20/Vue-Doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,10 +317,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">نُشر في</span>
-      
 
-      <time title="أُنشأ: 2020-10-20 21:49:00 / عُدل: 14:43:53" itemprop="dateCreated datePublished" datetime="2020-10-20T21:49:00+00:00">2020-10-20</time>
+      <time title="أُنشأ: 2020-10-20 21:49:00" itemprop="dateCreated datePublished" datetime="2020-10-20T21:49:00+00:00">2020-10-20</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2021-05-09 09:07:28" itemprop="dateModified" datetime="2021-05-09T09:07:28+00:00">2021-05-09</time>
+      </span>
 
   
 </div>
@@ -422,7 +523,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">عُدل في</span>
-        <time title="عُدل: 2020-10-20 14:43:53" itemprop="dateModified" datetime="2020-10-20T14:43:53+00:00">2020-10-20</time>
+        <time title="عُدل: 2021-05-09 09:07:28" itemprop="dateModified" datetime="2021-05-09T09:07:28+00:00">2021-05-09</time>
       </span>
 
   
@@ -522,7 +623,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">عُدل في</span>
-        <time title="عُدل: 2020-10-20 14:43:53" itemprop="dateModified" datetime="2020-10-20T14:43:53+00:00">2020-10-20</time>
+        <time title="عُدل: 2021-05-09 09:07:28" itemprop="dateModified" datetime="2021-05-09T09:07:28+00:00">2021-05-09</time>
       </span>
 
   
@@ -651,7 +752,7 @@ cond3(yes)->o3->e</textarea><textarea id="flowchart-0-options" style="display: n
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"uraidiot.github.io","root":"/blog/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="函数curry化 定义   柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。   大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数   涉及知识  闭包 递归   代码   1234567891011121314151617let judg">
+  <meta name="description" content="JavaScript 常被描述为一种基于原型的语言 (prototype-based language)——每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推  理解原型重要 : 区别对象原型和prototype属性  对象原型 可以通过Object.getPrototypeof方法或者__proto__(已弃用)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于个人理解的curry化">
-<meta property="og:url" content="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/index.html">
+<meta property="og:title" content="JavaScript原型">
+<meta property="og:url" content="https://uraidiot.github.io/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/index.html">
 <meta property="og:site_name" content="有点乱的blog">
-<meta property="og:description" content="函数curry化 定义   柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。   大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数   涉及知识  闭包 递归   代码   1234567891011121314151617let judg">
+<meta property="og:description" content="JavaScript 常被描述为一种基于原型的语言 (prototype-based language)——每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推  理解原型重要 : 区别对象原型和prototype属性  对象原型 可以通过Object.getPrototypeof方法或者__proto__(已弃用)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-16T15:48:31.000Z">
+<meta property="article:published_time" content="2021-05-07T16:57:14.000Z">
 <meta property="article:modified_time" content="2021-05-09T09:07:28.849Z">
 <meta property="article:author" content="URAIDIOT">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/">
+<link rel="canonical" href="https://uraidiot.github.io/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>基于个人理解的curry化 | 有点乱的blog</title>
+  <title>JavaScript原型 | 有点乱的blog</title>
   
 
 
@@ -148,7 +148,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0curry%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">函数curry化</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">理解原型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -202,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_cn">
-    <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          基于个人理解的curry化
+          JavaScript原型
         </h1>
 
         <div class="post-meta-container">
@@ -226,7 +226,7 @@
       </span>
       <span class="post-meta-item-text">نُشر في</span>
 
-      <time title="أُنشأ: 2020-08-16 15:48:31" itemprop="dateCreated datePublished" datetime="2020-08-16T15:48:31+00:00">2020-08-16</time>
+      <time title="أُنشأ: 2021-05-07 16:57:14" itemprop="dateCreated datePublished" datetime="2021-05-07T16:57:14+00:00">2021-05-07</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
@@ -246,35 +246,30 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="函数curry化"><a href="#函数curry化" class="headerlink" title="函数curry化"></a>函数curry化</h3><ul>
-<li>定义</li>
-</ul>
-<blockquote>
-<p>柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。</p>
+        <blockquote>
+<p>JavaScript 常被描述为一种基于原型的语言 (prototype-based language)——每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推</p>
 </blockquote>
-<blockquote>
-<p>大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数</p>
-</blockquote>
-<ul>
-<li><p>涉及知识</p>
+<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p><em>重要</em> : 区别对象原型和<code>prototype</code>属性</p>
 <ol>
-<li>闭包</li>
-<li>递归</li>
+<li><p>对象原型</p>
+<p>可以通过<code>Object.getPrototypeof</code>方法或者<code>__proto__</code>(已弃用), 获得对象的原型</p>
+</li>
+<li><p><code>prototype</code>属性</p>
+<p>该属性是在<code>constructor</code>构造函数上的一个<strong>属性</strong> , 在具体的<code>instance</code>实例上, <code>prototype</code>为<code>undefined</code></p>
+<p><em>注:</em> <code>&#123;&#125;</code>对象字面量是没有构造函数的. 定义的函数<code>function</code>是有构造函数的</p>
+</li>
 </ol>
-</li>
-<li><p>代码</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let judge;</span><br><span class="line"></span><br><span class="line">let curry &#x3D; (fn) &#x3D;&gt; </span><br><span class="line">    judge &#x3D; (...args) &#x3D;&gt;</span><br><span class="line">         args.length &#x3D;&#x3D;&#x3D; fn.length ? &#x2F;&#x2F; 判断传入参数个数与原函数形参个数是否相同</span><br><span class="line">             fn.apply(null, args) :  &#x2F;&#x2F; 相同则执行原函数</span><br><span class="line">             (...arg) &#x3D;&gt; judge(...args, ...arg) &#x2F;&#x2F; 不相同则再次传入judge函数</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所有的 args 都通过闭包得到了保存</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let add &#x3D; (a, b) &#x3D;&gt; a+b</span><br><span class="line"></span><br><span class="line">let curriedAdd &#x3D; curry(add);</span><br><span class="line"></span><br><span class="line">console.log(curriedAdd(1, 2)); &#x2F;&#x2F; 3</span><br><span class="line">console.log(curriedAdd(4)(5)); &#x2F;&#x2F; 9</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let Fn &#x3D; function () &#123;&#125;</span><br><span class="line"></span><br><span class="line">let fnInstance &#x3D; new Fn()</span><br><span class="line"></span><br><span class="line">fnInstance.prototype &#x2F;&#x2F; undefined</span><br><span class="line"></span><br><span class="line">Object.getPrototypeOf(fnInstance) &#x3D;&#x3D; Fn.prototype &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>执行过程</li>
-</ul>
-<p>声明<code>curry</code>函数,接受一个原函数<code>function</code>作为参数,返回一个<code>judge</code>判断函数,判断传入<code>judge</code>函数的参数个数与原函数的形参个数是否相同,如果相同则将所有参数传入原函数并执行,如果不同,则将之前的参数与后面的参数再次传入<code>judge</code>函数进行判读</p>
-<ul>
-<li>参考资料</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/42">JavaScript专题之函数柯里化</a></p>
+<p><em>注:</em> <strong>没有官方的方法直接访问对象的原型</strong> </p>
+<p><strong>对象定义模式中的编程技巧:</strong>  在<code>constructor</code>构造函数中定义属性, 在<code>prototype</code>中定义方法,可以让代码更具有可读性.(同时也可以提高部分性能?待考证, 在&lt;&lt;JavaScript编程模式&gt;&gt;中有提到过)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let Fn &#x3D; function (name, age) &#123;</span><br><span class="line">&#x2F;**</span><br><span class="line">* 定义属性</span><br><span class="line">*&#x2F;</span><br><span class="line">this.name &#x3D; name</span><br><span class="line">this.age &#x3D; age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line">* 在prototype中定义方法</span><br><span class="line">*&#x2F;</span><br><span class="line">Fn.prototype.hello &#x3D; function () &#123; console.log(&#39;hello, my name is &#39;+this.name)&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes">对象原型-MDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Inheritance">JavaScript中的继承-MDN</a></p>
+<p><em>注:</em> 着重查阅文档中的注意事项</p>
 
     </div>
 
@@ -288,14 +283,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" rel="prev" title="基于个人理解的事件循环">
-                  <i class="fa fa-chevron-left"></i> 基于个人理解的事件循环
+                <a href="/blog/2020/10/20/Vue-Doc/" rel="prev" title="Vue-Doc">
+                  <i class="fa fa-chevron-left"></i> Vue-Doc
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/10/20/Vue-Doc/" rel="next" title="Vue-Doc">
-                  Vue-Doc <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
