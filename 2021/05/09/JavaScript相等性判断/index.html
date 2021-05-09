@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"uraidiot.github.io","root":"/blog/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="函数curry化 定义   柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。   大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数   涉及知识  闭包 递归   代码   1234567891011121314151617let judg">
+  <meta name="description" content="相等性判断非严格相等 &#x3D;&#x3D; 同类型  Object类型之间比较指向对象的地址, 其他进行值的比较  非同类型  12345678910&#x2F;*** 以下比较均为 true*&#x2F;[] &#x3D;&#x3D; 0&quot;0&quot; &#x3D;&#x3D; 0&quot;\t&quot; &#x3D;&#x3D; 0[] !&#x3D; &quot;0&quot;[] !&#x3D; &quot;\t&quot;&quot;0&quot; !&#x3D; &quot;\t&quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于个人理解的curry化">
-<meta property="og:url" content="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/index.html">
+<meta property="og:title" content="JavaScript相等性判断">
+<meta property="og:url" content="https://uraidiot.github.io/blog/2021/05/09/JavaScript%E7%9B%B8%E7%AD%89%E6%80%A7%E5%88%A4%E6%96%AD/index.html">
 <meta property="og:site_name" content="有点乱的blog">
-<meta property="og:description" content="函数curry化 定义   柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。   大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数   涉及知识  闭包 递归   代码   1234567891011121314151617let judg">
+<meta property="og:description" content="相等性判断非严格相等 &#x3D;&#x3D; 同类型  Object类型之间比较指向对象的地址, 其他进行值的比较  非同类型  12345678910&#x2F;*** 以下比较均为 true*&#x2F;[] &#x3D;&#x3D; 0&quot;0&quot; &#x3D;&#x3D; 0&quot;\t&quot; &#x3D;&#x3D; 0[] !&#x3D; &quot;0&quot;[] !&#x3D; &quot;\t&quot;&quot;0&quot; !&#x3D; &quot;\t&quot;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-16T15:48:31.000Z">
+<meta property="article:published_time" content="2021-05-09T18:12:25.000Z">
 <meta property="article:modified_time" content="2021-05-09T14:30:29.252Z">
 <meta property="article:author" content="URAIDIOT">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/">
+<link rel="canonical" href="https://uraidiot.github.io/blog/2021/05/09/JavaScript%E7%9B%B8%E7%AD%89%E6%80%A7%E5%88%A4%E6%96%AD/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>基于个人理解的curry化 | 有点乱的blog</title>
+  <title>JavaScript相等性判断 | 有点乱的blog</title>
   
 
 
@@ -148,7 +148,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0curry%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">函数curry化</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E6%80%A7%E5%88%A4%E6%96%AD"><span class="nav-number">1.</span> <span class="nav-text">相等性判断</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%9E%E4%B8%A5%E6%A0%BC%E7%9B%B8%E7%AD%89"><span class="nav-number">1.1.</span> <span class="nav-text">非严格相等 &#x3D;&#x3D;</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -202,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_cn">
-    <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2020/08/16/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84curry%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://uraidiot.github.io/blog/2021/05/09/JavaScript%E7%9B%B8%E7%AD%89%E6%80%A7%E5%88%A4%E6%96%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          基于个人理解的curry化
+          JavaScript相等性判断
         </h1>
 
         <div class="post-meta-container">
@@ -225,16 +225,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">نُشر في</span>
+      
 
-      <time title="أُنشأ: 2020-08-16 15:48:31" itemprop="dateCreated datePublished" datetime="2020-08-16T15:48:31+00:00">2020-08-16</time>
+      <time title="أُنشأ: 2021-05-09 18:12:25 / عُدل: 14:30:29" itemprop="dateCreated datePublished" datetime="2021-05-09T18:12:25+00:00">2021-05-09</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">عُدل في</span>
-        <time title="عُدل: 2021-05-09 14:30:29" itemprop="dateModified" datetime="2021-05-09T14:30:29+00:00">2021-05-09</time>
-      </span>
 
   
 </div>
@@ -246,35 +240,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="函数curry化"><a href="#函数curry化" class="headerlink" title="函数curry化"></a>函数curry化</h3><ul>
-<li>定义</li>
+        <h4 id="相等性判断"><a href="#相等性判断" class="headerlink" title="相等性判断"></a>相等性判断</h4><h5 id="非严格相等"><a href="#非严格相等" class="headerlink" title="非严格相等 =="></a>非严格相等 ==</h5><ul>
+<li>同类型</li>
 </ul>
-<blockquote>
-<p>柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。</p>
-</blockquote>
-<blockquote>
-<p>大白话: 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数</p>
-</blockquote>
+<p><code>Object</code>类型之间比较指向对象的地址, 其他进行<strong>值</strong>的比较</p>
 <ul>
-<li><p>涉及知识</p>
-<ol>
-<li>闭包</li>
-<li>递归</li>
-</ol>
-</li>
-<li><p>代码</p>
-</li>
+<li>非同类型</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let judge;</span><br><span class="line"></span><br><span class="line">let curry &#x3D; (fn) &#x3D;&gt; </span><br><span class="line">    judge &#x3D; (...args) &#x3D;&gt;</span><br><span class="line">         args.length &#x3D;&#x3D;&#x3D; fn.length ? &#x2F;&#x2F; 判断传入参数个数与原函数形参个数是否相同</span><br><span class="line">             fn.apply(null, args) :  &#x2F;&#x2F; 相同则执行原函数</span><br><span class="line">             (...arg) &#x3D;&gt; judge(...args, ...arg) &#x2F;&#x2F; 不相同则再次传入judge函数</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所有的 args 都通过闭包得到了保存</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let add &#x3D; (a, b) &#x3D;&gt; a+b</span><br><span class="line"></span><br><span class="line">let curriedAdd &#x3D; curry(add);</span><br><span class="line"></span><br><span class="line">console.log(curriedAdd(1, 2)); &#x2F;&#x2F; 3</span><br><span class="line">console.log(curriedAdd(4)(5)); &#x2F;&#x2F; 9</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 以下比较均为 true</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[] == <span class="number">0</span></span><br><span class="line"><span class="string">&quot;0&quot;</span> == <span class="number">0</span></span><br><span class="line"><span class="string">&quot;\t&quot;</span> == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">[] != <span class="string">&quot;0&quot;</span></span><br><span class="line">[] != <span class="string">&quot;\t&quot;</span></span><br><span class="line"><span class="string">&quot;0&quot;</span> != <span class="string">&quot;\t&quot;</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>执行过程</li>
-</ul>
-<p>声明<code>curry</code>函数,接受一个原函数<code>function</code>作为参数,返回一个<code>judge</code>判断函数,判断传入<code>judge</code>函数的参数个数与原函数的形参个数是否相同,如果相同则将所有参数传入原函数并执行,如果不同,则将之前的参数与后面的参数再次传入<code>judge</code>函数进行判读</p>
-<ul>
-<li>参考资料</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/42">JavaScript专题之函数柯里化</a></p>
+<p><em>解析上述比较过程</em></p>
+<ol>
+<li><code>[]</code> 是<code>Object</code>类型, 调用<code>toString</code>方法, 返回<code>&quot;&quot;</code>(空字符), 与<code>0</code>进行比较, 需要再将<code>&quot;&quot;</code>转换成<code>Number</code>类型, 即<code>Number(&quot;&quot;)</code>返回<code>0</code>, 最后比较<code>0 == 0</code> 返回<code>true</code></li>
+<li><code>&quot;0&quot;</code>是<code>String</code>类型, 与<code>0</code>比较, 需要进行类型转换<code>Number(&#39;0&#39;)</code>返回<code>0</code>, 最后比较<code>0 == 0</code> 返回<code>true</code></li>
+<li><code>&quot;\t&quot;</code>(<code>\t</code>为空格符, 即实际内容为<code>&quot;  &quot;</code>)是<code>String</code>类型, 与<code>0</code>比较, 需要进行类型转换<code>Number(&#39;  &#39;)</code>返回<code>0</code>, 最后比较<code>0 == 0</code> 返回<code>true</code></li>
+<li><code>[]</code>调用<code>toString</code>后为<code>&quot;&quot;</code>, 与<code>&quot;0&quot;</code>同为<code>String</code>类型, 直接比较<code>&quot;&quot; == &quot;0&quot;</code>返回<code>false</code></li>
+<li><code>[]</code>调用<code>toString</code>后为<code>&quot;&quot;</code>, 与<code>&quot;  &quot;</code>同为<code>String</code>类型, 直接比较<code>&quot;&quot; == &quot;  &quot;</code>返回<code>false</code></li>
+<li><code>&quot;0&quot;</code>与<code>&quot;\t&quot;</code>同为<code>String</code>类型, 直接比较<code>&quot;0&quot; == &quot;  &quot;</code>返回<code>false</code></li>
+</ol>
+<p>在非严格相等<code>==</code>比较时, 出现类型不同时, 会先进行类型转换. <code>Object</code>类型会转换成原始值后进行比较, 会尝试调用<code>Object</code>的<code>toString</code>或者<code>valueOf</code>函数, 此时转换后是<code>String</code>类型, 再根据比较的内容或进行第二次类型转换. 除此之外, 不同类型的比较大都会转换成<code>Number</code>进行比较</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness">JavaScript 中的相等性判断-MDN</a></p>
 
     </div>
 
@@ -288,14 +273,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2020/06/28/%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" rel="prev" title="基于个人理解的事件循环">
-                  <i class="fa fa-chevron-left"></i> 基于个人理解的事件循环
+                <a href="/blog/2021/05/07/JavaScript%E5%8E%9F%E5%9E%8B/" rel="prev" title="JavaScript原型">
+                  <i class="fa fa-chevron-left"></i> JavaScript原型
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/10/20/Vue-Doc/" rel="next" title="Vue-Doc">
-                  Vue-Doc <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
