@@ -51,6 +51,31 @@ this.age = age
 Fn.prototype.hello = function () { console.log('hello, my name is '+this.name)}
 ```
 
+#### 原型继承实现
+
+```javascript
+function Parent () {}
+function Child() {}
+
+/*
+* Object.create 返回一个对象, 该对象的原型指向传入的参数
+* 字面量对象`{}`是没有`prototype`属性的
+*/
+function inherits(C, P) {
+	let proto = Object.create(P.prototype) // 
+  console.log('proto.__proto__ === P.prototype', proto.__proto__ === P.prototype)
+  C.prototype = proto
+  C.prototype.constructor = C
+}
+
+inherits(Child, Parent)
+
+let child = new Child()
+
+console.log(child.__proto__ === Child.prototype)
+console.log(child.__proto__.__proto__ === Parent.prototype)
+```
+
 
 
 #### 参考资料
